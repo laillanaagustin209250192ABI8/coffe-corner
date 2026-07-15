@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout | Kopi Karsa</title>
+  
+  <!-- Meta Descriptions for SEO -->
+  <meta name="description" content="Selesaikan pemesanan biji kopi premium dan alat seduh kopi Anda di halaman checkout aman Kopi Karsa.">
+  
+  <!-- FontAwesome for Premium Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Custom Style stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Decorative Background Glowing Spheres -->
+  <div style="position: absolute; width: 500px; height: 500px; background: radial-gradient(circle, rgba(223, 168, 87, 0.06) 0%, rgba(0, 0, 0, 0) 70%); top: 10%; right: -100px; pointer-events: none; z-index: 1;"></div>
+  <div style="position: absolute; width: 600px; height: 600px; background: radial-gradient(circle, rgba(156, 102, 68, 0.05) 0%, rgba(0,0,0,0) 75%); top: 60%; left: -200px; pointer-events: none; z-index: 1;"></div>
+
+  <!-- Header Navigation -->
+  <header>
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        <i class="fas fa-mug-hot" style="color: var(--color-primary);"></i>
+        Kopi<span>Karsa</span>
+      </a>
+      
+      <button class="menu-toggle" id="menu-toggle-btn" aria-label="Toggle Navigation Menu">
+        <i class="fas fa-bars"></i>
+      </button>
+
+      <nav>
+        <ul class="nav-links" id="nav-links-menu">
+          <li><a href="index.html">Beranda</a></li>
+          <li><a href="katalog.html">Katalog</a></li>
+          <li><a href="index.html#tentang-kami">Tentang Kami</a></li>
+          <li><a href="#kontak">Kontak</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <!-- Badge disabled click during checkout page to avoid clutter -->
+        <button id="cart-badge-btn-disabled" class="cart-badge-btn" style="cursor: default;" aria-label="Cart Status">
+          <i class="fas fa-shopping-bag"></i>
+          <span class="cart-count" id="cart-badge-count">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Checkout Grid Container -->
+  <main class="checkout-container">
+    <div class="checkout-title-bar">
+      <h1 style="font-size: 2.5rem; letter-spacing: 1px;">Selesaikan Pemesanan</h1>
+      <p style="color: var(--text-muted);">Lengkapi formulir pengiriman dan selesaikan pembayaran untuk memproses kopi Anda.</p>
+    </div>
+
+    <div class="checkout-grid">
+      
+      <!-- Checkout Form Panel (Glassmorphic) -->
+      <section class="checkout-form-section">
+        <form id="checkout-form" class="form-panel glass-panel">
+          <h2 class="checkout-section-title"><i class="fas fa-truck-fast"></i> Detail Pengiriman</h2>
+          
+          <div class="form-group">
+            <label for="checkout-nama">Nama Lengkap</label>
+            <input type="text" id="checkout-nama" class="form-input" placeholder="Masukkan nama penerima..." required>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="checkout-email">Email Aktif</label>
+              <input type="email" id="checkout-email" class="form-input" placeholder="pembeli@domain.com" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="checkout-phone">Nomor Handphone (WhatsApp)</label>
+              <input type="tel" id="checkout-phone" class="form-input" placeholder="0812XXXXXXXX" required>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="checkout-address">Alamat Lengkap Pengiriman</label>
+            <textarea id="checkout-address" class="form-textarea" placeholder="Tuliskan alamat lengkap beserta kode pos..." required></textarea>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="checkout-courier">Kurir Pengiriman</label>
+              <select id="checkout-courier" class="form-select" required>
+                <option value="" disabled selected>Pilih Kurir...</option>
+                <option value="JNE">JNE (Regular / Yes)</option>
+                <option value="J&T">J&T Express</option>
+                <option value="Pos Indonesia">Pos Indonesia</option>
+                <option value="GoSend">GoSend (Instan / Same Day)</option>
+                <option value="GrabExpress">GrabExpress (Instan)</option>
+              </select>
+            </div>
+            
+            <div class="form-group">
+              <label for="checkout-payment">Metode Pembayaran</label>
+              <select id="checkout-payment" class="form-select" required>
+                <option value="" disabled selected>Pilih Pembayaran...</option>
+                <option value="QRIS">QRIS (Gopay, OVO, Dana, ShopeePay)</option>
+                <option value="Virtual Account">Bank Transfer Virtual Account (Mandiri)</option>
+              </select>
+            </div>
+          </div>
+          
+          <!-- Submit checkout trigger payment gateway -->
+          <button type="submit" class="btn btn-primary" style="width: 100%; padding: 14px; margin-top: 10px;">
+            <i class="fas fa-credit-card"></i> Bayar Sekarang
+          </button>
+        </form>
+      </section>
+
+      <!-- Order Summary Column -->
+      <aside class="checkout-summary-section">
+        <div class="summary-panel glass-panel">
+          <h2 class="checkout-section-title" style="margin-bottom: 20px;"><i class="fas fa-receipt"></i> Ringkasan Belanja</h2>
+          
+          <!-- Product item row grid dynamically populated by checkout.js -->
+          <div class="summary-list" id="checkout-summary-list">
+            <!-- Items injected by script -->
+          </div>
+          
+          <div class="checkout-divider"></div>
+          
+          <div class="cart-summary-row">
+            <span>Subtotal Produk</span>
+            <span id="checkout-subtotal">Rp 0</span>
+          </div>
+          <div class="cart-summary-row">
+            <span>PPN (11%)</span>
+            <span id="checkout-ppn">Rp 0</span>
+          </div>
+          <div class="cart-summary-row">
+            <span>Ongkos Kirim</span>
+            <span id="checkout-shipping">Rp 0</span>
+          </div>
+          
+          <div class="cart-summary-row grand-total" style="margin-top: 16px;">
+            <span>Total Bayar</span>
+            <span id="checkout-total">Rp 0</span>
+          </div>
+        </div>
+      </aside>
+
+    </div>
+  </main>
+
+  <!-- Payment Simulation Gateway Modal (Glassmorphic) -->
+  <div class="payment-modal-overlay" id="payment-modal-overlay">
+    <div class="payment-modal glass-panel" id="payment-modal-container">
+      <!-- Injected dynamically by checkout.js -->
+    </div>
+  </div>
+
+  <!-- Contacts and Footer -->
+  <footer id="kontak">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>Kopi<span>Karsa</span></h3>
+        <p>Artisanal coffee roasters dan penyedia alat seduh kopi premium. Fokus pada keaslian rasa kopi single origin Indonesia.</p>
+        <div class="social-links">
+          <a href="#" class="social-icon" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="social-icon" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" class="social-icon" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="social-icon" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Navigasi</h4>
+        <ul>
+          <li><a href="index.html">Beranda</a></li>
+          <li><a href="katalog.html">Katalog Produk</a></li>
+          <li><a href="index.html#tentang-kami">Tentang Kami</a></li>
+          <li><a href="checkout.html">Checkout</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Kategori Kopi</h4>
+        <ul>
+          <li><a href="katalog.html?category=Biji+Kopi">Biji Kopi</a></li>
+          <li><a href="katalog.html?category=Minuman+Ready">Minuman Ready</a></li>
+          <li><a href="katalog.html?category=Alat+Kopi">Alat Kopi</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Hubungi Kami</h4>
+        <ul class="contact-info-list">
+          <li>
+            <i class="fas fa-location-dot"></i>
+            <span>Jl. Aroma Nusantara No. 88, Bandung, Jawa Barat</span>
+          </li>
+          <li>
+            <i class="fas fa-envelope"></i>
+            <span>halo@kopikarsa.id</span>
+          </li>
+          <li>
+            <i class="fas fa-phone"></i>
+            <span>+62 812-3456-7890</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2026 Kopi Karsa. Hak Cipta Dilindungi Undang-Undang. Tugas Besar KAIT II.</p>
+      <p>Designed with <i class="fas fa-heart" style="color: #e74c3c;"></i> for Specialty Coffee Lovers</p>
+    </div>
+  </footer>
+
+  <!-- JavaScript scripts -->
+  <script src="js/products.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/checkout.js"></script>
+</body>
+</html>

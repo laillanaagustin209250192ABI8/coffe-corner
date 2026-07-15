@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Katalog Produk Karsa | Kopi Karsa</title>
+  
+  <!-- Meta Descriptions for SEO -->
+  <meta name="description" content="Temukan beragam pilihan biji kopi Arabika single origin premium, cold brew ready-to-drink, dan peralatan manual brew kopi terbaik dari Kopi Karsa.">
+  <meta name="keywords" content="katalog kopi, beli kopi gayo, kopi sumatra, kopi toraja, alat kopi v60, cold brew bandung, kopi karsa, roastery premium">
+  
+  <!-- FontAwesome for Premium Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Custom Style stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Background Decorative Glowing Spheres -->
+  <div style="position: absolute; width: 500px; height: 500px; background: radial-gradient(circle, rgba(223, 168, 87, 0.08) 0%, rgba(0, 0, 0, 0) 70%); top: 10%; left: -200px; pointer-events: none; z-index: 1;"></div>
+  <div style="position: absolute; width: 600px; height: 600px; background: radial-gradient(circle, rgba(156, 102, 68, 0.06) 0%, rgba(0,0,0,0) 75%); top: 60%; right: -150px; pointer-events: none; z-index: 1;"></div>
+
+  <!-- Header Navigation -->
+  <header>
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        <i class="fas fa-mug-hot" style="color: var(--color-primary);"></i>
+        Kopi<span>Karsa</span>
+      </a>
+      
+      <button class="menu-toggle" id="menu-toggle-btn" aria-label="Toggle Navigation Menu">
+        <i class="fas fa-bars"></i>
+      </button>
+
+      <nav>
+        <ul class="nav-links" id="nav-links-menu">
+          <li><a href="index.html">Beranda</a></li>
+          <li><a href="katalog.html" class="active">Katalog</a></li>
+          <li><a href="index.html#tentang-kami">Tentang Kami</a></li>
+          <li><a href="#kontak">Kontak</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <button id="cart-badge-btn" class="cart-badge-btn" aria-label="Open Shopping Cart">
+          <i class="fas fa-shopping-bag"></i>
+          <span class="cart-count" id="cart-badge-count">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Page Main Catalog Content Container -->
+  <main class="catalog-page-container">
+    <div class="checkout-title-bar">
+      <h1 style="font-size: 2.5rem; letter-spacing: 1px;">Katalog Seduhan Karsa</h1>
+      <p style="color: var(--text-muted);">Pilih kopi favorit Anda dan rasakan kemurnian seduhannya.</p>
+    </div>
+
+    <div class="catalog-layout">
+      
+      <!-- Filters Sidebar (Glassmorphic) -->
+      <aside class="filter-sidebar glass-panel">
+        <!-- Search -->
+        <div class="filter-group">
+          <h3>Pencarian</h3>
+          <div class="search-wrapper">
+            <i class="fas fa-search search-icon"></i>
+            <input type="text" id="search-input" class="search-input" placeholder="Cari nama atau deskripsi...">
+          </div>
+        </div>
+
+        <!-- Categories Filter -->
+        <div class="filter-group">
+          <h3>Kategori</h3>
+          <div class="category-list">
+            <label class="category-checkbox">
+              <input type="checkbox" class="category-checkbox-input" value="Biji Kopi">
+              Biji Kopi
+            </label>
+            <label class="category-checkbox">
+              <input type="checkbox" class="category-checkbox-input" value="Minuman Ready">
+              Minuman Ready
+            </label>
+            <label class="category-checkbox">
+              <input type="checkbox" class="category-checkbox-input" value="Alat Kopi">
+              Alat Kopi
+            </label>
+          </div>
+        </div>
+
+        <!-- Price Range Filter -->
+        <div class="filter-group">
+          <h3>Rentang Harga (Maks)</h3>
+          <div class="price-range-wrapper">
+            <input type="range" id="price-range-slider" class="price-slider" min="30000" max="300000" step="5000" value="300000">
+            <div class="price-labels">
+              <span>Rp 30k</span>
+              <strong id="price-range-label" style="color: var(--color-primary);">Rp 300.000</strong>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Products Grid & Sort List -->
+      <section class="catalog-content">
+        <div class="catalog-info">
+          <span id="catalog-results-count">Menampilkan 0 produk</span>
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <label for="sort-select" style="font-size: 0.9rem;">Urutkan:</label>
+            <select id="sort-select" class="sort-select">
+              <option value="default">Rekomendasi</option>
+              <option value="price-low-high">Harga: Terendah ke Tertinggi</option>
+              <option value="price-high-low">Harga: Tertinggi ke Terendah</option>
+              <option value="name-asc">Nama: A ke Z</option>
+              <option value="name-desc">Nama: Z ke A</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="product-grid" id="catalog-product-grid">
+          <!-- Dynamic Products injected via js/main.js -->
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Product Detail Pop-Up Modal (Glassmorphic) -->
+  <div class="modal-overlay" id="product-detail-modal">
+    <div class="modal-container glass-panel">
+      <button class="modal-close" id="modal-close-btn" aria-label="Close Product Detail">
+        <i class="fas fa-times"></i>
+      </button>
+      
+      <div class="modal-content-grid">
+        <div class="modal-img-wrapper">
+          <img id="modal-product-img" src="" alt="Detail Produk">
+        </div>
+        
+        <div class="modal-details">
+          <span class="modal-category" id="modal-product-category">Biji Kopi</span>
+          <h2 class="modal-title" id="modal-product-title">Nama Produk</h2>
+          <div class="modal-price" id="modal-product-price">Rp 0</div>
+          <p class="modal-desc" id="modal-product-desc">Deskripsi lengkap produk di sini.</p>
+          
+          <div style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 24px;">
+            Stok Tersedia: <strong id="modal-product-stock">0</strong> unit
+          </div>
+
+          <div class="modal-action-wrapper">
+            <div class="qty-control">
+              <span class="qty-label">Kuantitas:</span>
+              <div class="qty-btn-group">
+                <button class="qty-btn" id="modal-qty-decrease">-</button>
+                <input type="number" id="modal-qty-input" class="qty-input" value="1" min="1" readonly>
+                <button class="qty-btn" id="modal-qty-increase">+</button>
+              </div>
+            </div>
+            
+            <button class="btn btn-primary" id="modal-add-to-cart-btn" style="width: 100%; padding: 14px;">
+              <i class="fas fa-cart-plus"></i> Tambahkan ke Keranjang
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Shopping Cart Slide Drawer Overlay & Container -->
+  <div class="cart-drawer-overlay" id="cart-drawer-overlay"></div>
+  
+  <div class="cart-drawer" id="cart-drawer">
+    <div class="cart-header">
+      <h2><i class="fas fa-shopping-cart" style="color: var(--color-primary);"></i> Keranjang</h2>
+      <button class="cart-drawer-close" id="cart-drawer-close" aria-label="Close Shopping Cart">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    
+    <div class="cart-items-list" id="cart-items-list">
+      <!-- Items dynamically populated by cart.js -->
+    </div>
+    
+    <div class="cart-footer">
+      <div class="cart-summary-row">
+        <span>Subtotal</span>
+        <span id="cart-subtotal-val">Rp 0</span>
+      </div>
+      <div class="cart-summary-row">
+        <span>Ongkos Kirim (Flat)</span>
+        <span id="cart-shipping-val">Rp 0</span>
+      </div>
+      <div class="cart-summary-row grand-total">
+        <span>Total Akhir</span>
+        <span id="cart-total-val">Rp 0</span>
+      </div>
+      <a href="checkout.html" class="btn btn-primary btn-checkout" id="btn-drawer-checkout">
+        <i class="fas fa-credit-card"></i> Lanjut ke Checkout
+      </a>
+    </div>
+  </div>
+
+  <!-- Contacts and Footer -->
+  <footer id="kontak">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>Kopi<span>Karsa</span></h3>
+        <p>Artisanal coffee roasters dan penyedia alat seduh kopi premium. Fokus pada keaslian rasa kopi single origin Indonesia.</p>
+        <div class="social-links">
+          <a href="#" class="social-icon" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="social-icon" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" class="social-icon" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="social-icon" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Navigasi</h4>
+        <ul>
+          <li><a href="index.html">Beranda</a></li>
+          <li><a href="katalog.html">Katalog Produk</a></li>
+          <li><a href="index.html#tentang-kami">Tentang Kami</a></li>
+          <li><a href="checkout.html">Checkout</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Kategori Kopi</h4>
+        <ul>
+          <li><a href="katalog.html?category=Biji+Kopi">Biji Kopi</a></li>
+          <li><a href="katalog.html?category=Minuman+Ready">Minuman Ready</a></li>
+          <li><a href="katalog.html?category=Alat+Kopi">Alat Kopi</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Hubungi Kami</h4>
+        <ul class="contact-info-list">
+          <li>
+            <i class="fas fa-location-dot"></i>
+            <span>Jl. Aroma Nusantara No. 88, Bandung, Jawa Barat</span>
+          </li>
+          <li>
+            <i class="fas fa-envelope"></i>
+            <span>halo@kopikarsa.id</span>
+          </li>
+          <li>
+            <i class="fas fa-phone"></i>
+            <span>+62 812-3456-7890</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2026 Kopi Karsa. Hak Cipta Dilindungi Undang-Undang. Tugas Besar KAIT II.</p>
+      <p>Designed with <i class="fas fa-heart" style="color: #e74c3c;"></i> for Specialty Coffee Lovers</p>
+    </div>
+  </footer>
+
+  <!-- JavaScript scripts -->
+  <script src="js/products.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    // Hook up drawer close button on catalog page specifically
+    window.addEventListener('DOMContentLoaded', () => {
+      const drawerClose = document.getElementById('cart-drawer-close');
+      if (drawerClose) {
+        drawerClose.addEventListener('click', closeCartDrawer);
+      }
+    });
+  </script>
+</body>
+</html>
